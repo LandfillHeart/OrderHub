@@ -8,31 +8,40 @@ using Domain;
 namespace Application
 {
     #region SINGLETON
-    sealed class ConfigurationProvider
+        sealed class ConfigurationProvider : IConfiguration
     {
-        // Lazy + thread-safe
-        private static readonly Lazy<ConfigurationProvider> _lazy =
+		#region Singleton
+		// Lazy + thread-safe
+		private static readonly Lazy<ConfigurationProvider> _lazy =
             new Lazy<ConfigurationProvider>(() => new ConfigurationProvider());
         public static ConfigurationProvider Instance => _lazy.Value;
-        public double TaxRate { get; private set; }
-        public string Currency { get; private set; }
-        public string Environment { get; private set; }
-        public string ApiBaseUrl { get; private set; }
-        public string CompanyName { get; private set; }
-        public DateTime LoadedAt { get; private set; }
-        public bool IsProduction { get; private set; }
+		#region Dependency Injection - Config
+		private IConfiguration configuration;
+		#endregion
 
-        private ConfigurationProvider()
-        {
-            Currency = "EUR";
-            TaxRate = Currency == "EUR" ? 0.22 : 0.10;
-            Environment = "Demo";
-            ApiBaseUrl = "https://api.orderhub.local";
-            CompanyName = "OrderHub S.r.l.";
-            LoadedAt = DateTime.UtcNow; //UtcNow sono le coordinate attuali configurate nel pc
-            IsProduction = Environment == "Demo" ? false : true;
-        }
-    }
+		public double TaxRate => configuration.TaxRate;
+        public string Currency => configuration.Currency;
+        public string Environment => configuration.Environment;
+        public string ApiBaseUrl => configuration.ApiBaseUrl;
+        public string CompanyName => configuration.CompanyName;
+        public DateTime LoadedAt => configuration.LoadedAt;
+        public bool IsProduction => configuration.IsProduction;
+
+        private ConfigurationProvider() 
+		{
+			// avoid null errors, provide default func, possibly serialize default config from user data etc etc
+			if (configuration == null)
+			{
+				configuration = Program.defaultConfig;
+			}
+		}
+		#endregion
+
+		public void SetConfiguration(IConfiguration config)
+		{
+			this.configuration = config;
+		}
+	}
     #endregion
 
     #region FACTORY
