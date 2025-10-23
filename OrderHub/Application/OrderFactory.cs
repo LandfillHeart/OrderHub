@@ -7,20 +7,13 @@ namespace OrderHub.Application
 	public class OrderFactory
 	{
 		private readonly IOrderRepository _orderRepository;
-		private readonly IProductRepository _productRepository;
-		private readonly IConfiguration _config;
 
 		public event OrderEventHandler OnOrderPaid;
 		public event OrderEventHandler OnOrderShipped;
 
-		public OrderFactory(
-			IOrderRepository orderRepository,
-			IProductRepository productRepository,
-			IConfiguration config)
+		public OrderFactory(IOrderRepository orderRepository)
 		{
 			_orderRepository = orderRepository;
-			_productRepository = productRepository;
-			_config = config;
 		}
 
 		public Order CreateOrder(string customerName)
