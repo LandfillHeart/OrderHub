@@ -9,37 +9,37 @@ Il progetto mostra un’architettura pulita e modulare, separando Domain, Infras
 ## 📁 Struttura del Progetto 📁
 
 OrderHub/
-|****Domain**/
-│ |**Entities/
-│ │ |**Product.cs
-│ │ |** Order.cs
-│ │ |** OrderItem.cs
+|--**Domain**/
+│ |--Entities/
+│ │ |--Product.cs
+│ │ |-- Order.cs
+│ │ |-- OrderItem.cs
 |
-│ |**Enums/
-│ │ |**OrderStatus.cs
+│ |--Enums/
+│ │ |--OrderStatus.cs
 |  
-│ |**Interfaces/
-│ │ |**IProductRepository.cs
-│ │ |** IOrderRepository.cs
+│ |--Interfaces/
+│ │ |--IProductRepository.cs
+│ │ |-- IOrderRepository.cs
 |
-│ |**Services/
-│ | |**OrderService.cs
+│ |--Services/
+│ | |--OrderService.cs
 │
-|****Infrastructure**/
-│ |** Repositories/
-│ │ ├── InMemoryProductRepository.cs
-│ │ └── InMemoryOrderRepository.cs
+|--**Infrastructure**/
+│ |-- Repositories/
+│ │ |-- InMemoryProductRepository.cs
+│ │ |-- InMemoryOrderRepository.cs
 |
-│ |**Factories/
-│ │ |** PaymentFactory.cs
+│ |--Factories/
+│ │ |-- PaymentFactory.cs
 |
-│ |** Config/
-│ | |** ConfigurationProvider.cs
+│ |-- Config/
+│ | |-- ConfigurationProvider.cs
 │
-|****Presentation**/
-│ |**ConsoleUI.cs
+|--**Presentation**/
+│ |--ConsoleUI.cs
 |
-│\_\_Program.cs
+│--Program.cs
 │
 └── README.md
 
