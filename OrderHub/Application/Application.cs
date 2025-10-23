@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace Application
 {
+
+    using Domain;
+    using Infrastructure;
+
+
     sealed class ConfigurationProvider
     {
         // Lazy + thread-safe
@@ -30,4 +35,35 @@ namespace Application
             IsProduction = Environment == "Demo" ? false : true;
         }
     }
+
+
+    
+    public class ProductService
+    {
+        private readonly IProductRepository _productRepository;
+        private int _nextId = 1;
+
+        public ProductService(IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
+        }
+
+        public void CreateProduct(string name, decimal price)
+        {
+            var product = new Product(_nextId++, name, price);
+            _productRepository.Add(product);
+            Console.WriteLine($"Prodotto '{name}'");
+        }
+
+        public List<Product> GetAllProducts()
+        {
+            return _productRepository.GetAll();
+        }
+
+        public Product GetProductById(int id)
+        {
+            return _productRepository.GetById(id);
+        }
+    }
+
 }
