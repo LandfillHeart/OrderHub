@@ -72,6 +72,9 @@ namespace OrderHub.Infrastructure.MemoryRepos
 			ProductsByID[id].Price = newPrice;
 		}
 
-
+		public List<Product> GetAll()
+		{
+			return ProductsByID.Values.ToList();
+		}
 	}
 }

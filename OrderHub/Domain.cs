@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace  Domain
+﻿namespace  Domain
 {
     public enum PaymentType { Card, PayPal, BankTransfer }
     public enum OrderStatus { New, Paid, Shipped, Cancelled }
@@ -84,12 +80,6 @@ namespace  Domain
         void Notify(string message);
     }
 
-    public interface IConfigurationProvider
-    {
-        decimal TaxRate { get; }
-        string Currency { get; }
-        string Environment { get; }
-    }
 }
 
 
