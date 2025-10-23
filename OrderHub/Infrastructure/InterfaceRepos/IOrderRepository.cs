@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain;
 
 namespace OrderHub.Infrastructure.InterfaceRepos
 {
 	internal interface IOrderRepository
 	{
-		public Dictionary<int, string> OrdersByID { get; }
-		public void CreateOrder(string newOrder);
-		public string ReadOrder(int id);
-		public void UpdateOrder(int id, string newOrder);
-		public void DeleteOrder(int id);
+		public Dictionary<Guid, Order> OrdersByID { get; }
+		public void CreateOrder(Order newOrder);
+		public Order ReadOrder(Guid id);
+		public void UpdateOrder(Guid id, Order newOrder);
+		public void DeleteOrder(Guid id);
 	}
 }
