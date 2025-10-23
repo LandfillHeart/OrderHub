@@ -5,9 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 
-namespace OrderHub.Application
+namespace Application
 {
-    sealed class ConfigurationProvider : IConfiguration
+    #region SINGLETON
+        sealed class ConfigurationProvider : IConfiguration
     {
 		#region Singleton
 		// Lazy + thread-safe
@@ -41,4 +42,55 @@ namespace OrderHub.Application
 			this.configuration = config;
 		}
 	}
+    #endregion
+
+    #region FACTORY
+    public static class PaymentFactory
+    {
+        public static IPayment Payment(PaymentType paymentType)
+        {
+            return paymentType switch
+            {
+                PaymentType.Card => new CardPayment(),
+                PaymentType.PayPal => new PayPalPayment(),
+                PaymentType.BankTransfer => new BankTrasferPayment(),
+                _ => throw new ArgumentException("Tipo non esistente!")
+            };
+        }
+    }
+    #endregion
+
+    #region ENTITA'
+    public class CardPayment : IPayment
+    {
+        private readonly OrderStatus _status;
+        public void ProcessPayment(decimal amount)
+        {
+            if (_status == OrderStatus.New) { Console.WriteLine($"Pagamento effettuato con Carta\timporto: {amount}"); }
+            throw new ArgumentException($"Non puoi effettuare il pagamento!\tStato attuale: {_status}");
+        }
+        public string GetName() { return "Carta"; }
+
+    }
+    public class PayPalPayment : IPayment
+    {
+        private readonly OrderStatus _status;
+        public void ProcessPayment(decimal amount)
+        {
+            if (_status == OrderStatus.New) { Console.WriteLine($"Pagamento effettuato con PayPal\timporto: {amount}"); }
+            throw new ArgumentException($"Non puoi effettuare il pagamento!\tStato attuale: {_status}");
+        }
+        public string GetName(){ return "PayPal"; }
+    }
+    public class BankTrasferPayment : IPayment
+    {
+        private readonly OrderStatus _status;
+        public void ProcessPayment(decimal amount)
+        {
+            if (_status == OrderStatus.New) { Console.WriteLine($"Pagamento effettuato con Bonifico\timporto: {amount}"); }
+            throw new ArgumentException($"Non puoi effettuare il pagamento!\tStato attuale: {_status}");
+        }
+        public string GetName() { return ""; }
+    }
+    #endregion
 }
