@@ -1,9 +1,13 @@
-﻿using OrderHub;
+﻿using Presentation;
+using OrderHub;
 
 public class Program
 {
 	public static void Main()
 	{
+		var ui = new ConsoleUI();
+		ui.StartApp();
+
 		ILogger logger = new ConsoleLogger();
 
 		var service = new OrderService(logger);
