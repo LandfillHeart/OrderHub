@@ -80,12 +80,6 @@
         void Notify(string message);
     }
 
-    public interface IConfigurationProvider
-    {
-        decimal TaxRate { get; }
-        string Currency { get; }
-        string Environment { get; }
-    }
 }
 
 

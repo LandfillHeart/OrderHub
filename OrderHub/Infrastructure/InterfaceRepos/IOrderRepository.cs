@@ -2,7 +2,7 @@
 
 namespace OrderHub.Infrastructure.InterfaceRepos
 {
-	internal interface IOrderRepository
+	public interface IOrderRepository
 	{
 		public Dictionary<Guid, Order> OrdersByID { get; }
 		public void CreateOrder(Order newOrder);
