@@ -1,7 +1,9 @@
 ﻿using OrderHub;
+using OrderHub.Application;
 
 public class Program
 {
+	public static IConfiguration defaultConfig = new EU_Config();
 	public static void Main()
 	{
 		ILogger logger = new ConsoleLogger();
