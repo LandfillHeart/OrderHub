@@ -1,4 +1,8 @@
-﻿namespace  Domain
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace  Domain
 {
     public enum PaymentType { Card, PayPal, BankTransfer }
     public enum OrderStatus { New, Paid, Shipped, Cancelled }
