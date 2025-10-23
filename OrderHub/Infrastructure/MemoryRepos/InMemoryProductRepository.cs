@@ -1,20 +1,40 @@
-﻿using System;
+﻿using OrderHub.Infrastructure.InterfaceRepos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderHub.Infrastructure
+namespace OrderHub.Infrastructure.MemoryRepos
 {
 	internal class InMemoryProductRepository : IProductRepository
 	{
+		#region Singleton
+		private static InMemoryProductRepository instance;
+		public static InMemoryProductRepository Instance
+		{
+			get
+			{
+				if(instance == null)
+				{
+					instance = new InMemoryProductRepository();
+				}
+				return instance;
+			}
+		}
+		private InMemoryProductRepository()
+		{
+			ProductsByID = new Dictionary<int, string>();
+		}
+		#endregion
+
 		// TODO: await domain contents to then couple with either types or interfaces
 		public Dictionary<int, string> ProductsByID { get; private set; }
 
 		public void CreateProduct(string productName, float productPrice)
 		{
 			// TODO: add a result message 
-			if (!IsValueValid(productName) || !IsValueValid(productPrice)) return;
+			if (!RepoHelper.IsValueValid(productName) || !RepoHelper.IsValueValid(productPrice)) return;
 
 			ProductsByID.Add(ID_Helper.GetNewID(), productName);
 		}
@@ -46,19 +66,11 @@ namespace OrderHub.Infrastructure
 				throw new ArgumentOutOfRangeException("ID non trovato");
 			}
 
-			if (!IsValueValid(newName) || !IsValueValid(newPrice)) return;
+			if (!RepoHelper.IsValueValid(newName) || !RepoHelper.IsValueValid(newPrice)) return;
 
 			ProductsByID[id] = newName;
 		}
 
-		private bool IsValueValid(string name)
-		{
-			return !string.IsNullOrEmpty(name);
-		}
 
-		private bool IsValueValid(float price)
-		{
-			return price > 0f;
-		}
 	}
 }

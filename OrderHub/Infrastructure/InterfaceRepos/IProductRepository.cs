@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderHub.Infrastructure
+namespace OrderHub.Infrastructure.InterfaceRepos
 {
 	internal interface IProductRepository
 	{
