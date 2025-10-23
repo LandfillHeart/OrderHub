@@ -1,4 +1,5 @@
-﻿using OrderHub.Infrastructure.InterfaceRepos;
+﻿using Domain;
+using OrderHub.Infrastructure.InterfaceRepos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,22 +25,21 @@ namespace OrderHub.Infrastructure.MemoryRepos
 		}
 		private InMemoryProductRepository()
 		{
-			ProductsByID = new Dictionary<int, string>();
+			ProductsByID = new Dictionary<int, Product>();
 		}
 		#endregion
 
-		// TODO: await domain contents to then couple with either types or interfaces
-		public Dictionary<int, string> ProductsByID { get; private set; }
+		public Dictionary<int, Product> ProductsByID { get; private set; }
 
-		public void CreateProduct(string productName, float productPrice)
+		public void CreateProduct(Product newProduct)
 		{
 			// TODO: add a result message 
-			if (!RepoHelper.IsValueValid(productName) || !RepoHelper.IsValueValid(productPrice)) return;
+			if (!RepoHelper.IsValid(newProduct)) return;
 
-			ProductsByID.Add(ID_Helper.GetNewID(), productName);
+			ProductsByID.Add(newProduct.Id, newProduct);
 		}
 
-		public string ReadProduct(int id)
+		public Product ReadProduct(int id)
 		{
 			if (!ProductsByID.ContainsKey(id))
 			{
@@ -58,7 +58,7 @@ namespace OrderHub.Infrastructure.MemoryRepos
 			ProductsByID.Remove(id);
 		}
 
-		public void UpdateProduct(int id, string newName, float newPrice)
+		public void UpdateProduct(int id, string newName, decimal newPrice)
 		{
 			// TODO: add a result message
 			if (!ProductsByID.ContainsKey(id))
@@ -68,7 +68,8 @@ namespace OrderHub.Infrastructure.MemoryRepos
 
 			if (!RepoHelper.IsValueValid(newName) || !RepoHelper.IsValueValid(newPrice)) return;
 
-			ProductsByID[id] = newName;
+			ProductsByID[id].Name = newName;
+			ProductsByID[id].Price = newPrice;
 		}
 
 

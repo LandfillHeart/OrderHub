@@ -86,21 +86,6 @@
         string Currency { get; }
         string Environment { get; }
     }
-
-    public interface IProductRepository
-    {
-        void Add(Product product);
-        Product GetById(int id);
-        List<Product> GetAll();
-    }
-
-    public interface IOrderRepository
-    {
-        void Add(Order order);
-        Order GetById(Guid id);
-        List<Order> GetAll();
-        void Update(Order order);
-    }
 }
 
 
