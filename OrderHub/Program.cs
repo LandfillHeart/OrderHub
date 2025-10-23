@@ -1,9 +1,15 @@
 ﻿using OrderHub;
+using OrderHub.Application;
+using Presentation;
 
 public class Program
 {
+	public static IConfiguration defaultConfig = new EU_Config();
 	public static void Main()
 	{
+		var ui = new ConsoleUI();
+		ui.StartApp();
+
 		ILogger logger = new ConsoleLogger();
 
 		var service = new OrderService(logger);
