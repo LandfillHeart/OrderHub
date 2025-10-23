@@ -68,8 +68,6 @@ namespace Presentation
                         Console.ResetColor();
                         break;
                 }
-
-
             } while (_running);
         }
 
@@ -150,9 +148,14 @@ namespace Presentation
         private void AddItemToOrderUI()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"===== CREA UN ORDINE =====");
+            Console.WriteLine($"===== AGGIUNGI DEI PRODOTTI AD UN ORDINE =====");
             Console.ResetColor();
             Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"[OK] Prodotto Aggiunto: [PRODOTTO]");
+            Console.ResetColor();
+            Console.WriteLine($"[CONTENUTO]");
         }
 
         // 5 Esegui il checkout
@@ -162,6 +165,11 @@ namespace Presentation
             Console.WriteLine($"===== ESEGUI IL CHECKOUT=====");
             Console.ResetColor();
             Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"[OK] Checkout eseguito con successo!");
+            Console.ResetColor();
+            Console.WriteLine($"[CONTENUTO]");
         }
 
         // 6 Spedisci un ordine
@@ -171,6 +179,11 @@ namespace Presentation
             Console.WriteLine($"===== SPEDISCI UN ORDINE =====");
             Console.ResetColor();
             Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"[OK] Ordine spedito con successo!");
+            Console.ResetColor();
+            Console.WriteLine($"[CONTENUTO]");
         }
 
         // 7 Cancella un ordine
@@ -180,6 +193,10 @@ namespace Presentation
             Console.WriteLine($"===== CANCELLA UN ORDINE =====");
             Console.ResetColor();
             Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"[OK] Ordine Cancellato con successo");
+            Console.ResetColor();
         }
 
         // 8 Vedi l'elenco degli ordini
