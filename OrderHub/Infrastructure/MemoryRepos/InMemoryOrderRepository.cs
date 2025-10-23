@@ -1,4 +1,5 @@
-﻿using OrderHub.Infrastructure.InterfaceRepos;
+﻿using Domain;
+using OrderHub.Infrastructure.InterfaceRepos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,23 +25,23 @@ namespace OrderHub.Infrastructure.MemoryRepos
 		}
 		private InMemoryOrderRepository()
 		{
-			OrdersByID = new Dictionary<int, string>();
+			OrdersByID = new Dictionary<Guid, Order>();
 		}
 		#endregion
-		public Dictionary<int, string> OrdersByID { get; }
+		public Dictionary<Guid, Order> OrdersByID { get; }
 
-		public void CreateOrder(string newOrder)
+		public void CreateOrder(Order newOrder)
 		{
-			if (!RepoHelper.IsValueValid(newOrder)) return;
-			OrdersByID.Add(ID_Helper.GetNewID(), newOrder);
+			if (!RepoHelper.IsValid(newOrder)) return;
+			OrdersByID.Add(newOrder.Id, newOrder);
 		}
 
-		public void DeleteOrder(int id)
+		public void DeleteOrder(Guid id)
 		{
 			if (!OrdersByID.ContainsKey(id)) return;
 		}
 
-		public string ReadOrder(int id)
+		public Order ReadOrder(Guid id)
 		{
 			if (!OrdersByID.ContainsKey(id))
 			{
@@ -49,10 +50,10 @@ namespace OrderHub.Infrastructure.MemoryRepos
 			return OrdersByID[id];
 		}
 
-		public void UpdateOrder(int id, string newOrder)
+		public void UpdateOrder(Guid id, Order newOrder)
 		{
 			if (!OrdersByID.ContainsKey(id)) return;
-			if (!RepoHelper.IsValueValid(newOrder)) return;
+			if (!RepoHelper.IsValid(newOrder)) return;
 			OrdersByID[id] = newOrder;
 		}
 	}
