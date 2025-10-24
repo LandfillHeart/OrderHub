@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrderHub.Infrastructure.MemoryRepos
 {
-	internal class InMemoryProductRepository : IProductRepository
+	public class InMemoryProductRepository : IProductRepository
 	{
 		#region Singleton
 		private static InMemoryProductRepository instance;
@@ -72,6 +72,9 @@ namespace OrderHub.Infrastructure.MemoryRepos
 			ProductsByID[id].Price = newPrice;
 		}
 
-
+		public List<Product> GetAll()
+		{
+			return ProductsByID.Values.ToList();
+		}
 	}
 }

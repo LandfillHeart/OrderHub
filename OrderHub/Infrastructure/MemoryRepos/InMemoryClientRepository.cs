@@ -33,13 +33,13 @@ namespace OrderHub.Infrastructure.MemoryRepos
 		{
 			if (!RepoHelper.IsValueValid(name)) return;
 
-			ClientsByID.Add(ID_Helper.GetNewID(), name);
+			ClientsByID.Add(0, name);
 		}
 
 		public void DeleteClient(int id)
 		{
-			if (!ClientsByID.ContainsKey(ID_Helper.GetNewID())) return;
-			ClientsByID.Remove(ID_Helper.GetNewID());
+			if (!ClientsByID.ContainsKey(0)) return;
+			ClientsByID.Remove(0);
 		}
 
 		public string ReadClient(int id)

@@ -7,6 +7,7 @@ using Domain;
 using Infrastructure;
 using System.Runtime.Intrinsics.Arm;
 using System.Drawing;
+using OrderHub.Application;
 
 namespace Presentation
 {
@@ -108,7 +109,9 @@ namespace Presentation
             Console.WriteLine($"Inserisci la quantita di prodotto nel magazzino");
             int stock = int.Parse(Console.ReadLine());
 
-            // TODO: aggiungere le chiamate il service per rendere vere le operazioni
+			// TODO: aggiungere le chiamate il service per rendere vere le operazioni
+			// niente stock :(
+			ApplicationLayer.Instance.CreateProduct(name, price);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"[OK] Prodotto '{name}' creato con successo!");
@@ -125,9 +128,16 @@ namespace Presentation
             Console.ResetColor();
             Console.WriteLine();
 
-            // TODO: recupero del repository dei prodotti
-
-            Console.WriteLine($"[PRODOTTO] ID | Nome | Prezzo | QUANTITÀ");
+			// TODO: recupero del repository dei prodotti
+			if(!ApplicationLayer.Instance.GetAllProducts(out List<Product> serializedProds))
+			{
+				Console.Write("Non sei collegato al database, impossibile visualizzare ordini!!");
+			}
+			foreach (Product prod in serializedProds)
+			{
+				Console.WriteLine($"[PRODOTTO] {prod.Id} | {prod.Name} | {prod.Price} | QUANTITÀ (da implementare) ");
+			}
+            
         }
 
         // 3 Crea un ordine

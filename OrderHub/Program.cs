@@ -1,10 +1,18 @@
-﻿using Presentation;
-using OrderHub;
+﻿using OrderHub;
+using OrderHub.Application;
+using OrderHub.Infrastructure.InterfaceRepos;
+using OrderHub.Infrastructure.MemoryRepos;
+using Presentation;
 
 public class Program
 {
+	public static IConfiguration defaultConfig = new EU_Config();
 	public static void Main()
 	{
+		IProductRepository productRepo = InMemoryProductRepository.Instance;
+
+		ApplicationLayer.Instance.InitializeProductRepo(productRepo);
+
 		var ui = new ConsoleUI();
 		ui.StartApp();
 
