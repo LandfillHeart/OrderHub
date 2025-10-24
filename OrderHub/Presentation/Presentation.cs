@@ -150,10 +150,14 @@ namespace Presentation
             Console.ResetColor();
             Console.WriteLine();
 
+            Console.WriteLine($"Inserire nome del cliente che crea l'ordine: ");
+            string? customerName = Console.ReadLine();
+            ApplicationLayer.Instance.CreateOrder(customerName);
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"[OK] ORDINE CREATO");
             Console.ResetColor();
-            Console.WriteLine($"[CONTENUTO]");
+            Console.WriteLine($"Ordine creato a nome di {customerName}");
         }
 
         // 4 Aggiungi degli oggetti ad un ordine 

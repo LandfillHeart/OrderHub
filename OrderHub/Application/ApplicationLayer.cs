@@ -75,7 +75,7 @@ namespace OrderHub.Application
 
 		public bool GetProduct(int prodID, out Product toReturn)
 		{
-			if(productRepository == null)
+			if (productRepository == null)
 			{
 				toReturn = null;
 				return false;
@@ -84,6 +84,52 @@ namespace OrderHub.Application
 			toReturn = productRepository.ReadProduct(prodID);
 			return true;
 		}
+
+		public void CreateOrder(string customerName)
+		{
+			if (orderRepository == null)
+			{
+				Console.WriteLine("Nessun accesso ad una repo di prodotti");
+				return;
+			}
+
+			// this pushes directly into the repo
+			orderFactory.CreateOrder(customerName);
+		}
+
+		public bool ReadOrder(Guid id, out Order toReturn)
+		{
+			if (orderRepository == null)
+			{
+				toReturn = null;
+				return false;
+			}
+
+			toReturn = orderRepository.ReadOrder(id);
+			return true;
+		}
+
+		public void UpdateOrder(Guid id, Order order)
+		{
+			if (orderRepository == null)
+			{
+				Console.WriteLine("Nessun accesso ad una repo di prodotti");
+				return;
+			}
+
+			orderRepository.UpdateOrder(id, order);
+		}
+		
+		public void DeleteOrder(Guid id)
+    {
+			if (orderRepository == null)
+			{
+				Console.WriteLine("Nessun accesso ad una repo di ordini");
+				return;
+			}
+
+			orderRepository.DeleteOrder(id);
+    }
 		// CRUD - Orders
 
 	}

@@ -10,8 +10,10 @@ public class Program
 	public static void Main()
 	{
 		IProductRepository productRepo = InMemoryProductRepository.Instance;
+		IOrderRepository orderRepo = InMemoryOrderRepository.Instance;
 
 		ApplicationLayer.Instance.InitializeProductRepo(productRepo);
+		ApplicationLayer.Instance.InitializeOrderFactory(orderRepo);
 
 		var ui = new ConsoleUI();
 		ui.StartApp();

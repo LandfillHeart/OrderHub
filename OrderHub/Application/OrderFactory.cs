@@ -20,7 +20,7 @@ namespace OrderHub.Application
 		{
 			var order = new Order(customerName);
 			_orderRepository.CreateOrder(order);
-			Console.WriteLine($"Ordine {order.Id} creato da ");
+			Console.WriteLine($"Ordine {order.Id} creato da {customerName}");
 			return order;
 		}
 	}
